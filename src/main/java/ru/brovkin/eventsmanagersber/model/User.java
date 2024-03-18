@@ -1,13 +1,25 @@
 package ru.brovkin.eventsmanagersber.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String password;
+    @ManyToOne
+    @JoinColumn(name = "role")
     private Role role;
     private String firstName;
     private String lastName;
+
+    public User() {
+
+    }
 
     public User(long id, String username, String password, Role role, String firstName, String lastName) {
         this.id = id;

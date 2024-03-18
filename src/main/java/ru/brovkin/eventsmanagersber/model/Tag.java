@@ -1,10 +1,21 @@
 package ru.brovkin.eventsmanagersber.model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tags")
 public class Tag {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String description;
+
+    public Tag() {
+
+    }
 
     public Tag(long id, String name, String description) {
         this.id = id;

@@ -1,23 +1,47 @@
 package ru.brovkin.eventsmanagersber.model;
 
+import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "events")
 public class Event {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String description;
-    private long locationId;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+    @Temporal(TemporalType.DATE)
     private Date date;
-    private Date dateCreation;
+    @Temporal(TemporalType.TIME)
+    private Time time;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "event_tags",
+            joinColumns = {@JoinColumn(name = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id")}
+    )
+    private List<Tag> tags;
 
-    public Event(long id, String name, String description, long locationId, Date date, Date dateCreation) {
+
+    public Event() {
+
+    }
+
+    public Event(long id, String name, String description, Location location, Date date, Time time, List<Tag> tags) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.locationId = locationId;
+        this.location = location;
         this.date = date;
-        this.dateCreation = dateCreation;
+        this.time = time;
+        this.tags = tags;
     }
 
     public long getId() {
@@ -44,12 +68,12 @@ public class Event {
         this.description = description;
     }
 
-    public long getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(long locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location locationId) {
+        this.location = locationId;
     }
 
     public Date getDate() {
@@ -60,11 +84,19 @@ public class Event {
         this.date = date;
     }
 
-    public Date getDateCreation() {
-        return dateCreation;
+    public Time getTime() {
+        return time;
     }
 
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

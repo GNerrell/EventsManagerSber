@@ -1,11 +1,22 @@
 package ru.brovkin.eventsmanagersber.model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "locations")
 public class Location {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String city;
     private String street;
     private String house;
+
+    public Location() {
+
+    }
 
     public Location(long id, String city, String street, String house) {
         this.id = id;

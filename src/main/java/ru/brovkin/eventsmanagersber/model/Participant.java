@@ -1,16 +1,30 @@
 package ru.brovkin.eventsmanagersber.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "participants")
 public class Participant {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long eventId;
-    private long userId;
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private boolean activeStatus;
 
-    public Participant(long id, long eventId, long userId, boolean activeStatus) {
+    public Participant() {
+
+    }
+
+    public Participant(long id, Event event, User user, boolean activeStatus) {
         this.id = id;
-        this.eventId = eventId;
-        this.userId = userId;
+        this.event = event;
+        this.user = user;
         this.activeStatus = activeStatus;
     }
 
@@ -22,20 +36,20 @@ public class Participant {
         this.id = id;
     }
 
-    public long getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventId(long eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event eventId) {
+        this.event = eventId;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User userId) {
+        this.user = userId;
     }
 
     public boolean isActiveStatus() {
