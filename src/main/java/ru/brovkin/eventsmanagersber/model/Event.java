@@ -1,5 +1,7 @@
 package ru.brovkin.eventsmanagersber.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
@@ -19,13 +21,13 @@ public class Event {
     private Location location;
     @Temporal(TemporalType.DATE)
     private Date date;
-    @Temporal(TemporalType.TIME)
+    @Type(type = "time")
     private Time time;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "event_tags",
-            joinColumns = {@JoinColumn(name = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")}
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")}
     )
     private List<Tag> tags;
 

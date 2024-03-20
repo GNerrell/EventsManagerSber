@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface LocationRepository extends CrudRepository<Location, Long> {
 
-    List<Location> findAllByCity(String city);
-    List<Location> getLocationsByCity(String city);
-    List<Location> getLocationsByCityAndStreet(String city, String street);
+    Location findLocationById(Long id);
+    List<Location> findLocationsByCity(String city);
+    List<Location> findLocationsByCityAndStreet(String city, String street);
+    void deleteLocationById(Long id);
 }

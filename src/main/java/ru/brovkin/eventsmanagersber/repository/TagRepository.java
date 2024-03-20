@@ -5,5 +5,7 @@ import ru.brovkin.eventsmanagersber.model.Tag;
 
 public interface TagRepository extends CrudRepository<Tag, Long> {
 
-    Tag getTagByName(String name);
+    Tag findTagByName(String name);
+    void deleteTagById(Long id);
+    void deleteTagByName(String name);
 }

@@ -11,7 +11,10 @@ import java.util.List;
 public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findAllByLocation(Location location);
-    List<Event> findAllByTags(List<Tag> tags);
     Event findByName(String name);
     List<Event> findAllByDate(Date date);
+    void deleteEventsByName(String name);
+    void deleteEventByNameAndDate(String name, Date date);
+    void deleteEventById(Long id);
+
 }

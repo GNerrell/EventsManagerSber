@@ -9,8 +9,9 @@ import java.util.List;
 
 public interface ParticipantRepository extends CrudRepository<Participant, Long> {
 
-    Participant findByUserAndEvent(User user, Event event);
+    Participant findParticipantByUserAndEvent(User user, Event event);
     List<Participant> findAllByActiveStatus(boolean activeStatus);
     List<Participant> findAllByEvent(Event event);
     List<Participant> findAllByUser(User user);
+    void deleteParticipantById(Long id);
 }

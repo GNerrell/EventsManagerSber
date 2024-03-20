@@ -15,17 +15,18 @@ public class Participant {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @Column(name = "subscribed")
     private boolean activeStatus;
 
     public Participant() {
 
     }
 
-    public Participant(long id, Event event, User user, boolean activeStatus) {
+    public Participant(long id, Event event, User user) {
         this.id = id;
         this.event = event;
         this.user = user;
-        this.activeStatus = activeStatus;
+        this.activeStatus = true;
     }
 
     public long getId() {
