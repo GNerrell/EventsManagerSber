@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Location;
-import ru.brovkin.eventsmanagersber.model.Tag;
 import ru.brovkin.eventsmanagersber.repository.EventRepository;
 
 import java.util.Date;

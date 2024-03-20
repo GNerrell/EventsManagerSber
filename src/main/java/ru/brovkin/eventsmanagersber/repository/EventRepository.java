@@ -3,7 +3,6 @@ package ru.brovkin.eventsmanagersber.repository;
 import org.springframework.data.repository.CrudRepository;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Location;
-import ru.brovkin.eventsmanagersber.model.Tag;
 
 import java.util.Date;
 import java.util.List;

@@ -16,7 +16,7 @@ public class Tag {
 
     }
 
-    public Tag(long id, String name, String description) {
+    public Tag(long id, String name) {
         this.id = id;
         this.name = name;
     }
