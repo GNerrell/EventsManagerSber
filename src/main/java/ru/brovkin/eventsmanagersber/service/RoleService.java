@@ -6,6 +6,8 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Role;
 import ru.brovkin.eventsmanagersber.repository.RoleRepository;
 
+import java.util.List;
+
 
 @Service
 public class RoleService {
@@ -27,6 +29,10 @@ public class RoleService {
 
     public void deleteById(Long id) {
         roleRepository.deleteRoleById(id);
+    }
+
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
     }
 
     public Role getById(Long id) {

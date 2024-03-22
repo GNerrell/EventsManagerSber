@@ -11,6 +11,8 @@ import ru.brovkin.eventsmanagersber.service.RoleService;
 
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.assertThrows;
 
@@ -33,6 +35,13 @@ public class RoleServiceTests {
         String roleName = "CREATOR";
         Role role = roleService.getByName(roleName);
         assertThat(role.getName()).isEqualTo(roleName);
+    }
+
+    @Test
+    public void testGetAllRolesFromDb() {
+        List<Role> role = roleService.getAllRoles();
+        assertThat(role.get(1).getName()).isEqualTo("CREATOR");
+        assertThat(role.size()).isEqualTo(3);
     }
 
     @Test
