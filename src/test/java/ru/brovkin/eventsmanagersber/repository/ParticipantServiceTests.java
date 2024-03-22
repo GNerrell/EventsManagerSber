@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import ru.brovkin.eventsmanagersber.configuration.UserConfig;
+import ru.brovkin.eventsmanagersber.configuration.PasswordConfig;
 import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Participant;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThrows;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import({EventService.class, UserService.class, ParticipantService.class, UserConfig.class})
+@Import({EventService.class, UserService.class, ParticipantService.class, PasswordConfig.class})
 public class ParticipantServiceTests {
 
     @Autowired
