@@ -51,9 +51,4 @@ public class AuthorizationController {
         }
     }
 
-    @GetMapping("/home")
-    public String homePage() {
-        return "home";
-    }
-
 }

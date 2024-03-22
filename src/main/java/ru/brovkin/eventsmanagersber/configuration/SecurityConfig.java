@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .formLogin()
                     .loginPage("/event/authorize/login")
-                    .defaultSuccessUrl("/event/authorize/home", true)
+                    .defaultSuccessUrl("/event/home", true)
                     .failureUrl("/event/authorize/login")
                     .permitAll()
                     .and()

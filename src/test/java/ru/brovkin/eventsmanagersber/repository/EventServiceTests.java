@@ -62,6 +62,13 @@ public class EventServiceTests {
     }
 
     @Test
+    public void testGetAllEvents() {
+        List<Event> events = eventService.getAllEvents();
+        assertThat(events.size()).isEqualTo(6);
+        assertThat(events.get(3).getName()).isEqualTo("Фристайл-баттл «На районе»");
+    }
+
+    @Test
     public void testUpdateEvent() {
         Event event = eventService.getById(1L);
         event.setDescription("Нет описания");

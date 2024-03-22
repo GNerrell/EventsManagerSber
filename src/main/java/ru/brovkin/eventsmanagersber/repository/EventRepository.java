@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface EventRepository extends CrudRepository<Event, Long> {
 
     Optional<Event> findEventById(Long id);
+    List<Event> findAll();
     Optional<List<Event>> findAllByLocation(Location location);
     Optional<List<Event>> findAllByName(String name);
     Optional<List<Event>> findAllByDate(Date date);

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Event Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 th:text="${event.name}"></h1>
+    <div class="row">
+        <div class="col">
+            <p>Категории:</p>
+            <ul class="list-inline">
+                <li th:each="tag : ${event.tags}" class="list-inline-item">
+                    <span th:text="${tag.name}"></span>
+                </li>
+            </ul>
+            <p>Описание: <span th:text="${event.description}"></span></p>
+            <p>Дата: <span th:text="${event.date}"></span></p>
+            <p>Время: <span th:text="${event.time}"></span></p>
+            <p>Место проведения: <span th:text="${event.location.city} + ', ' + ${event.location.street} + ', ' + ${event.location.house}"></span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

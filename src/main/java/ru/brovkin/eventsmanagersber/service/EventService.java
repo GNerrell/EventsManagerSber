@@ -40,6 +40,10 @@ public class EventService {
         return eventRepository.findAllByName(name).orElseThrow(() -> new LuckOfDataException("No such events with name " + name + "!"));
     }
 
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
+    }
+
     public List<Event> getEventsByLocation(Location location) {
         return eventRepository.findAllByLocation(location).orElseThrow(() -> new LuckOfDataException("No such events in this location!"));
     }
