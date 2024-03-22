@@ -56,8 +56,4 @@ public class AuthorizationController {
         return "home";
     }
 
-    @GetMapping("/bad_login")
-    public String badLogin() {
-        return "bad_login";
-    }
 }
