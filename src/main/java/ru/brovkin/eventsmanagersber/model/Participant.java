@@ -3,7 +3,7 @@ package ru.brovkin.eventsmanagersber.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "participants")
+@Table(name = "participants", uniqueConstraints = @UniqueConstraint(columnNames={"user_id", "event_id"}))
 public class Participant {
 
     @Id

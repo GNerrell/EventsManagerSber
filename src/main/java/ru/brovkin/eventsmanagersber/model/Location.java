@@ -2,6 +2,7 @@ package ru.brovkin.eventsmanagersber.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "locations")
@@ -13,6 +14,9 @@ public class Location {
     private String city;
     private String street;
     private String house;
+
+    @OneToMany(mappedBy = "location", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Event> events;
 
     public Location() {
 
@@ -55,6 +59,14 @@ public class Location {
 
     public void setHouse(String house) {
         this.house = house;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     @Override

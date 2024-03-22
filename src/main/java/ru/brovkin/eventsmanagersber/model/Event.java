@@ -31,6 +31,9 @@ public class Event {
     )
     private List<Tag> tags;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Participant> participants;
+
 
     public Event() {
 

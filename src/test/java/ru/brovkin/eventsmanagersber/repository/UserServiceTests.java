@@ -52,11 +52,10 @@ public class UserServiceTests {
     @Test
     public void testUpdateUser() {
         User user = userService.getUserById(1L);
-        String oldName = user.getUsername();
         user.setUsername("USER");
         userService.updateUser(user);
-        assertThat(user.getUsername()).isEqualTo("USER");
-        assertThat(user.getUsername()).isNotEqualTo(oldName);
+        User userDb = userService.getUserById(1L);
+        assertThat(userDb.getUsername()).isEqualTo(user.getUsername());
     }
 
 
@@ -74,5 +73,11 @@ public class UserServiceTests {
         assertThat(userDb.getUsername()).isEqualTo(user.getUsername());
         userService.deleteById(userDb.getId());
         assertThrows(LuckOfDataException.class, () -> userService.getUserById(userDb.getId()));
+    }
+
+    @Test
+    public void testDeleteLinkedUserById() {
+        userService.deleteById(1L);
+        assertThrows(LuckOfDataException.class, () -> userService.getUserById(1L));
     }
 }

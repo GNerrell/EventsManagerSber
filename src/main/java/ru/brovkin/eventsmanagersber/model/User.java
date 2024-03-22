@@ -1,6 +1,7 @@
 package ru.brovkin.eventsmanagersber.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -16,6 +17,8 @@ public class User {
     private Role role;
     private String firstName;
     private String lastName;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Participant> participants;
 
     public User() {
 

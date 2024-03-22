@@ -6,12 +6,14 @@ import ru.brovkin.eventsmanagersber.model.Participant;
 import ru.brovkin.eventsmanagersber.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ParticipantRepository extends CrudRepository<Participant, Long> {
 
-    Participant findParticipantByUserAndEvent(User user, Event event);
-    List<Participant> findAllByActiveStatus(boolean activeStatus);
-    List<Participant> findAllByEvent(Event event);
-    List<Participant> findAllByUser(User user);
+    Optional<Participant> findParticipantById(Long id);
+    Optional<Participant> findParticipantByUserAndEvent(User user, Event event);
+    Optional<List<Participant>> findAllByActiveStatus(boolean activeStatus);
+    Optional<List<Participant>> findAllByEvent(Event event);
+    Optional<List<Participant>> findAllByUser(User user);
     void deleteParticipantById(Long id);
 }

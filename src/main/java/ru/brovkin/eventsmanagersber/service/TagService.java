@@ -2,6 +2,7 @@ package ru.brovkin.eventsmanagersber.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Tag;
 import ru.brovkin.eventsmanagersber.repository.TagRepository;
 
@@ -27,11 +28,11 @@ public class TagService {
         tagRepository.deleteTagById(id);
     }
 
-    public void deleteByName(String name) {
-        tagRepository.deleteTagByName(name);
+    public Tag getTagById(Long id) {
+        return tagRepository.findTagById(id).orElseThrow(() -> new LuckOfDataException("Tag with id = " + id + " not found!"));
     }
 
     public Tag getByName(String name) {
-        return tagRepository.findTagByName(name);
+        return tagRepository.findTagByName(name).orElseThrow(() -> new LuckOfDataException("Tag with name = " + name + " not found!"));
     }
 }

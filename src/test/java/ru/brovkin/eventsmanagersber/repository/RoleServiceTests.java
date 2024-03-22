@@ -9,6 +9,8 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Role;
 import ru.brovkin.eventsmanagersber.service.RoleService;
 
+import org.springframework.dao.DataIntegrityViolationException;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.assertThrows;
 
@@ -46,13 +48,18 @@ public class RoleServiceTests {
     }
 
     @Test
+    public void testDeleteLinkedRoleById() {
+        roleService.deleteById(1L);
+        assertThrows(DataIntegrityViolationException.class, () -> roleService.getById(1L));
+    }
+
+    @Test
     public void testUpdateRole() {
         Role role = roleService.getById(1L);
-        String oldName = role.getName();
         role.setName("USER");
         roleService.updateRole(role);
-        assertThat(role.getName()).isEqualTo("USER");
-        assertThat(role.getName()).isNotEqualTo(oldName);
+        Role roleDb = roleService.getById(1L);
+        assertThat(roleDb.getName()).isEqualTo(role.getName());
     }
 
 }

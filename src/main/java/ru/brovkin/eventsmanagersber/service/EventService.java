@@ -2,6 +2,7 @@ package ru.brovkin.eventsmanagersber.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Location;
 import ru.brovkin.eventsmanagersber.repository.EventRepository;
@@ -31,23 +32,19 @@ public class EventService {
         eventRepository.deleteEventById(id);
     }
 
-    public void deleteEventsByName(String name) {
-        eventRepository.deleteEventsByName(name);
+    public Event getById(Long id) {
+        return eventRepository.findEventById(id).orElseThrow(() -> new LuckOfDataException("Event with id = " + id + " not found!"));
     }
 
-    void deleteEventByNameAndDate(String name, Date date) {
-        eventRepository.deleteEventByNameAndDate(name, date);
+    public List<Event> getEventsByName(String name) {
+        return eventRepository.findAllByName(name).orElseThrow(() -> new LuckOfDataException("No such events with name " + name + "!"));
     }
 
     public List<Event> getEventsByLocation(Location location) {
-        return eventRepository.findAllByLocation(location);
-    }
-
-    public Event getByName(String name) {
-        return eventRepository.findByName(name);
+        return eventRepository.findAllByLocation(location).orElseThrow(() -> new LuckOfDataException("No such events in this location!"));
     }
 
     public List<Event> getAllByDate(Date date) {
-        return eventRepository.findAllByDate(date);
+        return eventRepository.findAllByDate(date).orElseThrow(() -> new LuckOfDataException("No such events in this date!"));
     }
 }
