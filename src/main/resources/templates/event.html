@@ -19,6 +19,9 @@
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/event/create">Создать мероприятие</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -33,23 +36,22 @@
 </nav>
 
 <div class="container mt-4">
-    <h1 th:text="${event.name}"></h1>
-    <div class="row">
-        <div class="col">
-            <p>Категории:</p>
-            <ul class="list-inline">
-                <li th:each="tag : ${event.tags}" class="list-inline-item">
-                    <span th:text="${tag.name}"></span>
-                </li>
-            </ul>
-            <p>Описание: <span th:text="${event.description}"></span></p>
-            <p>Дата: <span th:text="${event.date}"></span></p>
-            <p>Время: <span th:text="${event.time}"></span></p>
-            <p>Место проведения: <span th:text="${event.location.city} + ', ' + ${event.location.street} + ', ' + ${event.location.house}"></span></p>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title" th:text="${event.name}"></h2>
+            <p class="card-text"><strong>Описание:</strong> <span th:text="${event.description}"></span></p>
+            <p class="card-text"><strong>Дата:</strong> <span th:text="${event.date}"></span></p>
+            <p class="card-text"><strong>Время:</strong> <span th:text="${event.time}"></span></p>
+            <p class="card-text"><strong>Место проведения:</strong> <span th:text="${event.location.city + ', ' + event.location.street + ', ' + event.location.house}"></span></p>
+            <p class="card-text"><strong>Категории:</strong>
+                <span th:each="tag : ${event.tags}" class="badge bg-warning text-dark me-1" th:text="${tag.name}"></span>
+            </p>
         </div>
     </div>
 </div>
 
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

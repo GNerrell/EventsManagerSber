@@ -35,11 +35,14 @@
                         <div class="mb-3">
                             <label for="role" class="form-label">Ваша роль:</label>
                             <select class="form-select" id="role" name="role" th:field="*{role}" required>
-                                <option value="">Select Role</option>
+                                <option value="">Выберите роль</option>
                                 <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                            <a href="/event/authorize/login" class="btn btn-secondary">Отмена</a>
+                        </div>
                     </form>
                     <br>
                     <p th:text="${message}" style="color: red;"></p>

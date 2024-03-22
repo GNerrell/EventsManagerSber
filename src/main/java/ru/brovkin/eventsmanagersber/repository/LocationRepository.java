@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface LocationRepository extends CrudRepository<Location, Long> {
 
+    List<Location> findAll();
     Optional<Location> findLocationById(Long id);
     Optional<List<Location>> findLocationsByCity(String city);
     Optional<List<Location>> findLocationsByCityAndStreet(String city, String street);

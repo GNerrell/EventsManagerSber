@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
 import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Location;
+import ru.brovkin.eventsmanagersber.model.Role;
+import ru.brovkin.eventsmanagersber.model.User;
 import ru.brovkin.eventsmanagersber.service.LocationService;
 
 import java.util.List;
@@ -42,6 +44,12 @@ public class LocationServiceTests {
         String city = "Рязань";
         List<Location> location = locationService.getAllByCity(city);
         assertThat(location.size()).isEqualTo(8);
+    }
+
+    @Test
+    public void testGetAllLocationsFromDb() {
+        assertThat(locationService.getAllLocations().size()).isEqualTo(8);
+        assertThat(locationService.getAllLocations().get(0).getStreet()).isEqualTo("Чайкиной");
     }
 
     @Test

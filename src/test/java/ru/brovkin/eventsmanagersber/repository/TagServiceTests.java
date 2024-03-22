@@ -35,6 +35,12 @@ public class TagServiceTests {
     }
 
     @Test
+    public void testGetAllLocationsFromDb() {
+        assertThat(tagService.getAllTags().size()).isEqualTo(14);
+        assertThat(tagService.getAllTags().get(0).getName()).isEqualTo("образовательное");
+    }
+
+    @Test
     public void testUpdateTag() {
         Tag tag = tagService.getTagById(1L);
         tag.setName("Специализированное");

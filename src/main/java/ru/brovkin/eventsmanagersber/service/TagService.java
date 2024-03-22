@@ -6,6 +6,8 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Tag;
 import ru.brovkin.eventsmanagersber.repository.TagRepository;
 
+import java.util.List;
+
 @Service
 public class TagService {
 
@@ -30,6 +32,10 @@ public class TagService {
 
     public Tag getTagById(Long id) {
         return tagRepository.findTagById(id).orElseThrow(() -> new LuckOfDataException("Tag with id = " + id + " not found!"));
+    }
+
+    public List<Tag> getAllTags() {
+        return tagRepository.findAll();
     }
 
     public Tag getByName(String name) {

@@ -7,7 +7,7 @@ INSERT INTO users (username, password, role, first_name, last_name) VALUES ('use
 INSERT INTO users (username, password, role, first_name, last_name) VALUES ('user2', '$2a$10$ybvrwq9fGFHllwIG5iK7reLz2K8jYcxS2IMV1nUMva3U7La0HqOG6', 1, 'Василий', 'Дидляков');
 INSERT INTO users (username, password, role, first_name, last_name) VALUES ('user3', '$2a$10$ybvrwq9fGFHllwIG5iK7reLz2K8jYcxS2IMV1nUMva3U7La0HqOG6', 1, 'Кирилл', 'Тутцев');
 INSERT INTO users (username, password, role, first_name, last_name) VALUES ('user4', '$2a$10$ybvrwq9fGFHllwIG5iK7reLz2K8jYcxS2IMV1nUMva3U7La0HqOG6', 1, 'Анатолий', 'Овальный');
-INSERT INTO users (username, password, role, first_name, last_name) VALUES ('сreator1', '$2a$10$ybvrwq9fGFHllwIG5iK7reLz2K8jYcxS2IMV1nUMva3U7La0HqOG6', 2, 'Максим', 'Сотин');
+INSERT INTO users (username, password, role, first_name, last_name) VALUES ('creator1', '$2a$10$ybvrwq9fGFHllwIG5iK7reLz2K8jYcxS2IMV1nUMva3U7La0HqOG6', 2, 'Максим', 'Сотин');
 INSERT INTO users (username, password, role, first_name, last_name) VALUES ('administrator1', '$2a$10$ybvrwq9fGFHllwIG5iK7reLz2K8jYcxS2IMV1nUMva3U7La0HqOG6', 3, 'Сергей', 'Путин');
 
 INSERT INTO tags (name) VALUES ('образовательное'); --1
