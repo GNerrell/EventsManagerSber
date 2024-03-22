@@ -2,12 +2,17 @@ package ru.brovkin.eventsmanagersber.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import ru.brovkin.eventsmanagersber.service.CustomUserDetailsService;
 
 @Configuration
@@ -47,6 +52,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout()
                     .logoutUrl("/logout")
-                    .permitAll();
+                    .logoutSuccessUrl("/login?logout")
+                    .permitAll()
+                    .and()
+                    .sessionManagement()
+                    .invalidSessionUrl("/login")
+                    .maximumSessions(1)
+                    .sessionRegistry(sessionRegistry());
         }
+
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public static ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+        return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
+    }
 }
