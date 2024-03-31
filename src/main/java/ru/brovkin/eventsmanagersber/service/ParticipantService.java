@@ -54,4 +54,5 @@ public class ParticipantService {
     public List<Participant> getAllByUser(User user) {
         return participantRepository.findAllByUser(user).orElseThrow(() -> new LuckOfDataException("No such participants on event = " + user.getUsername() + "!"));
     }
+
 }

@@ -22,11 +22,11 @@ public class Participant {
 
     }
 
-    public Participant(long id, Event event, User user) {
+    public Participant(long id, Event event, User user, boolean activeStatus) {
         this.id = id;
         this.event = event;
         this.user = user;
-        this.activeStatus = true;
+        this.activeStatus = activeStatus;
     }
 
     public long getId() {
