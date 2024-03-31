@@ -5,9 +5,7 @@
   4. Запустить проект
   5. Перейти на адрес http://localhost:8080/login
 Если требуется не пересоздавать базу при каждом запуске программы то следует поменять атрибут ddl-auto:
-<br>
 ![image](https://github.com/GNerrell/EventsManagerSber/assets/106912430/7d7825cd-d83a-4480-affc-71a88553113c)
-<br>
 Структура базы данных проекта:
 <br>
 ![image](https://github.com/GNerrell/EventsManagerSber/assets/106912430/d99b2824-df51-4f20-b597-12152fb9bea9)
