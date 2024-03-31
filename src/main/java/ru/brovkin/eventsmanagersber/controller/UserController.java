@@ -10,7 +10,6 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Participant;
 import ru.brovkin.eventsmanagersber.model.User;
-import ru.brovkin.eventsmanagersber.service.EventService;
 import ru.brovkin.eventsmanagersber.service.ParticipantService;
 import ru.brovkin.eventsmanagersber.service.UserService;
 import ru.brovkin.eventsmanagersber.utils.EventSorter;
@@ -23,16 +22,19 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
-    private final EventService eventService;
     private final ParticipantService participantService;
 
-    public UserController(UserService userService, EventService eventService, ParticipantService participantService) {
+    public UserController(UserService userService, ParticipantService participantService) {
         this.userService = userService;
-        this.eventService = eventService;
         this.participantService = participantService;
     }
 
 
+    /**
+     * Форма профиля пользователя
+     * @param model - для добавления данных пользователя и списка событий
+     * @return переход на страницу профиля согласно роли
+     */
     @GetMapping("/profile")
     public String showProfile(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

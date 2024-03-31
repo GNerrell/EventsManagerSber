@@ -1,7 +1,6 @@
 package ru.brovkin.eventsmanagersber.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Event;
@@ -11,6 +10,9 @@ import ru.brovkin.eventsmanagersber.repository.ParticipantRepository;
 
 import java.util.List;
 
+/**
+ * Реализация всех CRUD методов и дополнительных методов доступа к базе данных для Participant
+ */
 @Service
 public class ParticipantService {
 

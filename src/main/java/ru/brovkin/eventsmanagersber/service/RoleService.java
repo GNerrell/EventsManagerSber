@@ -8,7 +8,9 @@ import ru.brovkin.eventsmanagersber.repository.RoleRepository;
 
 import java.util.List;
 
-
+/**
+ * Реализация всех CRUD методов и дополнительных методов доступа к базе данных для Role
+ */
 @Service
 public class RoleService {
 

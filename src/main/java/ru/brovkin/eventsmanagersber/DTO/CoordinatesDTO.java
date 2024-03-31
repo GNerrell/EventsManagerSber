@@ -1,5 +1,10 @@
 package ru.brovkin.eventsmanagersber.DTO;
 
+/**
+ * Класс предназначенный для хранения значений после получения
+ * шиироты и долготы из GET запроса к 2GIS API
+ */
+
 public class CoordinatesDTO {
     private final Double lat;
     private final Double lon;

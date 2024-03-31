@@ -18,9 +18,9 @@ import javax.transaction.Transactional;
 @RequestMapping("/event/participant")
 public class ParticipantController {
 
-    private EventService eventService;
-    private UserService userService;
-    private ParticipantService participantService;
+    private final EventService eventService;
+    private final UserService userService;
+    private final ParticipantService participantService;
 
     public ParticipantController(EventService eventService, UserService userService, ParticipantService participantService) {
         this.eventService = eventService;
@@ -28,11 +28,11 @@ public class ParticipantController {
         this.participantService = participantService;
     }
 
-    @GetMapping("/add/{eventId}")
-    public String get() {
-        return "redirect:/event/home";
-    }
-
+    /**
+     * Добавление пользователя в число участников мероприятия
+     * @param eventId - идентификатор мероприятия, на которое записывается пользователь
+     * @return возвращает на предыдущую страницу
+     */
     @PostMapping("/add/{eventId}")
     public String setParticipantToEvent(@PathVariable Long eventId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -53,6 +53,11 @@ public class ParticipantController {
         }
     }
 
+    /**
+     * Удаление пользователя из числа участников
+     * @param eventId - идентификатор мероприятия, на которое записывается пользователь
+     * @return возвращает на предыдущую страницу
+     */
     @Transactional
     @PostMapping("/delete/{eventId}")
     public String deleteParticipantFromEvent(@PathVariable Long eventId) {

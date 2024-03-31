@@ -8,6 +8,9 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.User;
 import ru.brovkin.eventsmanagersber.repository.UserRepository;
 
+/**
+ * Класс для помощи в осуществлении авторизации пользователя
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

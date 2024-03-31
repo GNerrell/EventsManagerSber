@@ -5,8 +5,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Role;
 import ru.brovkin.eventsmanagersber.model.User;
 import ru.brovkin.eventsmanagersber.service.RoleService;

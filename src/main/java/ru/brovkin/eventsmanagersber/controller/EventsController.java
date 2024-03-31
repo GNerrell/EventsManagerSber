@@ -37,6 +37,11 @@ public class EventsController {
         this.api2GisService = api2GisService;
     }
 
+    /**
+     *
+     * @param model - доставить на html страницу события
+     * @return Домашняя страница
+     */
     @GetMapping("/home")
     public String getMainPage(Model model) {
         List<Event> events = eventService.getAllEvents();
@@ -45,6 +50,11 @@ public class EventsController {
         return "home";
     }
 
+    /**
+     *
+     * @param request - требуется для получения URL предыдущей страницы, с которой пользователь перешел на текущую страницу.
+     * @return возврат просиходит либо на предыдущую страницу либо на домашнюю
+     */
     @GetMapping("/previousPage")
     public String getPreviousPage(HttpServletRequest request) {
         String referer = request.getHeader("Referer");
@@ -54,6 +64,12 @@ public class EventsController {
         return "redirect:home";
     }
 
+    /**
+     * Просмотр события по его идентификатору
+     * @param eventId - идентификатор события, которое желаем просмотреть
+     * @param model - с её помощью передаем объекты события на форму
+     * @return
+     */
     @GetMapping("/details/{eventId}")
     public String showEventDetailsPage(@PathVariable Long eventId, Model model) {
         try {
@@ -68,15 +84,11 @@ public class EventsController {
         }
     }
 
-    private void setModelSubscribedAttribute(Model model, User user, Event event) {
-        try {
-            participantService.getByUserAndEvent(user, event);
-            model.addAttribute("subscribed", true);
-        } catch (LuckOfDataException e) {
-            model.addAttribute("subscribed", false);
-        }
-    }
-
+    /**
+     * Форма создания события
+     * @param model - с ее помощью на форму переносятся все тэги, локации и времени
+     * @return
+     */
     @GetMapping("/create")
     public String showCreateEventForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -92,6 +104,17 @@ public class EventsController {
         }
     }
 
+
+    /**
+     * Создание нового мероприятия по заполненным полям
+     * @param name - поле класса Event
+     * @param description - поле класса Event
+     * @param location - поле класса Event
+     * @param date - поле класса Event
+     * @param timeString - поле класса Event
+     * @param selectedTags - поле класса Event
+     * @return возвращает на домашнюю страницу после создания
+     */
     @PostMapping("/create")
     public String createEvent(@RequestParam("name") String name,
                               @RequestParam("description") String description,
@@ -100,7 +123,7 @@ public class EventsController {
                               @RequestParam("time") String timeString,
                               @RequestParam("tags") List<String> selectedTags) {
 
-        Event event = getEvent(name, description, location, date, timeString, selectedTags);
+        Event event = setEvent(name, description, location, date, timeString, selectedTags);
         eventService.addEvent(event);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -112,6 +135,16 @@ public class EventsController {
         return "redirect:/event/home";
     }
 
+    /**
+     * Отображает карту с маршрутом от пользователя до мероприятия
+     * @param eventId - id мероприятия
+     * @param city - город пользователя
+     * @param street - улица пользователя
+     * @param house - дом пользователя
+     * @param wayToMove - способ передвижения (пешком или на автомобиле)
+     * @param model - требуется для передачи всех описанных выше значений на форму
+     * @return форма с картой 2GIS
+     */
     @GetMapping("/map/{eventId}")
     public String showInteractiveMap(@PathVariable Long eventId,
                                      @RequestParam("city") String city,
@@ -130,7 +163,16 @@ public class EventsController {
         return "map_2gis";
     }
 
-    private Event getEvent(String name, String description, Location location, Date date, String timeString, List<String> selectedTags) {
+    private void setModelSubscribedAttribute(Model model, User user, Event event) {
+        try {
+            participantService.getByUserAndEvent(user, event);
+            model.addAttribute("subscribed", true);
+        } catch (LuckOfDataException e) {
+            model.addAttribute("subscribed", false);
+        }
+    }
+
+    private Event setEvent(String name, String description, Location location, Date date, String timeString, List<String> selectedTags) {
         Event event = new Event();
         event.setName(name);
         event.setDescription(description);

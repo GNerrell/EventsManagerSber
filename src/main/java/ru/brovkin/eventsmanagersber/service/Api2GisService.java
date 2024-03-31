@@ -15,7 +15,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+/**
+ * Класс для использования Geocoder API 2GIS
+ * для получения координат широты и долготы по адресу
+ */
 @Service
 public class Api2GisService {
 
@@ -25,6 +28,11 @@ public class Api2GisService {
 
     }
 
+    /**
+     * Получение DTO с параметром класса Location
+     * @param location - класс Location в котором обозначены поля города, улицы и дома
+     * @return в случае успеха возвращает оюъект класса CoordinatesDTO
+     */
     public CoordinatesDTO getCoordinatesFromLocationAddress(Location location) {
         try {
             URL url = getUrlFromLocation(location);
@@ -36,6 +44,13 @@ public class Api2GisService {
         return null;
     }
 
+    /**
+     * Получение DTO с помощью города, улицы и дома
+     * @param city - город
+     * @param street - улица
+     * @param house - дом
+     * @return в случае успеха возвращает оюъект класса CoordinatesDTO
+     */
     public CoordinatesDTO getCoordinatesFromLocationAddress(String city, String street, String house) {
         try {
             URL url = getUrlFromLocationData(city, street, house);
@@ -75,6 +90,12 @@ public class Api2GisService {
         return response;
     }
 
+    /**
+     * парсинг JSON файла для получения широты и долготы
+     * @param response - строка JSON файла
+     * @return
+     * @throws JsonProcessingException
+     */
     private static CoordinatesDTO getCoordinatesDTO(StringBuilder response) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.toString());
@@ -88,6 +109,12 @@ public class Api2GisService {
         return null;
     }
 
+    /**
+     * Создание URL для требуемого GET запроса c помощью объекта Location
+     * @param location - класс Location в котором обозначены поля города, улицы и дома
+     * @return URL
+     * @throws MalformedURLException
+     */
     private static URL getUrlFromLocation(Location location) throws MalformedURLException {
         StringBuilder urlString = new StringBuilder();
         urlString.append("https://catalog.api.2gis.com/3.0/items/geocode?q=");
@@ -99,6 +126,14 @@ public class Api2GisService {
         return new URL(urlString.toString());
     }
 
+    /**
+     * Создание URL для требуемого GET запроса c помощью города, улицы, дома
+     * @param city - город
+     * @param street - улица
+     * @param house - дом
+     * @return URL
+     * @throws MalformedURLException
+     */
     private static URL getUrlFromLocationData(String city, String street, String house) throws MalformedURLException {
         StringBuilder urlString = new StringBuilder();
         urlString.append("https://catalog.api.2gis.com/3.0/items/geocode?q=");

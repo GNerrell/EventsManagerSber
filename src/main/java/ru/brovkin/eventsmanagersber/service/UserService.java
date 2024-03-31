@@ -10,6 +10,9 @@ import ru.brovkin.eventsmanagersber.repository.UserRepository;
 
 import java.util.List;
 
+/**
+ * Реализация всех CRUD методов и дополнительных методов доступа к базе данных для User
+ */
 @Service
 public class UserService {
 

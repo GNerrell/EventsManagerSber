@@ -8,6 +8,9 @@ import ru.brovkin.eventsmanagersber.repository.TagRepository;
 
 import java.util.List;
 
+/**
+ * Реализация всех CRUD методов и дополнительных методов доступа к базе данных для Tag
+ */
 @Service
 public class TagService {
 

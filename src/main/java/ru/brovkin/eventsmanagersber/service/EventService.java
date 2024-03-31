@@ -10,6 +10,9 @@ import ru.brovkin.eventsmanagersber.repository.EventRepository;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Реализация всех CRUD методов и дополнительных методов доступа к базе данных для Event
+ */
 @Service
 public class EventService {
 
