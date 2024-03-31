@@ -42,18 +42,51 @@
             <p class="card-text"><strong>Описание:</strong> <span th:text="${event.description}"></span></p>
             <p class="card-text"><strong>Дата:</strong> <span th:text="${event.date}"></span></p>
             <p class="card-text"><strong>Время:</strong> <span th:text="${event.time}"></span></p>
-            <p class="card-text"><strong>Место проведения:</strong> <span th:text="${event.location.city + ', ' + event.location.street + ', ' + event.location.house}"></span></p>
-            <p class="card-text"><strong>Категории:</strong>
-                <span th:each="tag : ${event.tags}" class="badge bg-warning text-dark me-1" th:text="${tag.name}"></span>
+            <p class="card-text"><strong>Место проведения:</strong> <span
+                    th:text="${event.location.city + ', ' + event.location.street + ', ' + event.location.house}"></span>
             </p>
+            <p class="card-text"><strong>Категории:</strong>
+                <span th:each="tag : ${event.tags}" class="badge bg-warning text-dark me-1"
+                      th:text="${tag.name}"></span>
+            </p>
+
+            <input type="hidden" id="isSubscribed" th:value="${subscribed}">
+            <form th:if="${!subscribed}" th:action="@{/event/participant/add/{eventId}(eventId=${event.id})}"
+                  method="post">
+                <button id="subButton" type="submit" class="btn btn-primary">Подписаться</button>
+            </form>
+            <form th:if="${subscribed}" th:action="@{/event/participant/delete/{eventId}(eventId=${event.id})}"
+                  method="post">
+                <button id="unsubButton" type="submit" class="btn btn-primary">Отписаться</button>
+            </form>
         </div>
-        <input type="hidden" id="isSubscribed" th:value="${subscribed}">
-        <form th:if="${!subscribed}" th:action="@{/event/participant/add/{eventId}(eventId=${event.id})}" method="post">
-            <button id="subButton" type="submit" class="btn btn-primary">Подписаться</button>
-        </form>
-        <form th:if="${subscribed}" th:action="@{/event/participant/delete/{eventId}(eventId=${event.id})}" method="post">
-            <button id="unsubButton" type="submit" class="btn btn-primary">Отписаться</button>
-        </form>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Узнать маршрут:</h5>
+            <form th:action="@{/event/map/{eventId}(eventId=${event.id})}" method="get">
+                <div class="mb-3">
+                    <label for="city" class="form-label">Город:</label>
+                    <input type="text" class="form-control" id="city" name="city" value="Рязань" readonly required>
+                </div>
+                <div class="mb-3">
+                    <label for="street" class="form-label">Улица:</label>
+                    <input type="text" class="form-control" id="street" name="street" placeholder="Ваша улица" required>
+                </div>
+                <div class="mb-3">
+                    <label for="house" class="form-label">Дом:</label>
+                    <input type="text" class="form-control" id="house" name="house" placeholder="Ваш номер дома"
+                           required>
+                </div>
+                <label for="way" class="form-label">Выберите тип передвижения по маршруту:</label>
+                <select class="form-select" id="way" name="way" required>
+                    <option value="true">Автомобильный маршрут</option>
+                    <option value="false">Пешеходный маршрут</option>
+                </select>
+
+                <button id="mapButton" type="submit" class="btn btn-primary">Показать маршрут</button>
+            </form>
+        </div>
     </div>
 </div>
 

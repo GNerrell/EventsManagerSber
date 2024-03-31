@@ -1,6 +1,5 @@
 INSERT INTO roles (name) VALUES ('COMMON_USER');
 INSERT INTO roles (name) VALUES ('CREATOR');
-INSERT INTO roles (name) VALUES ('ADMINISTRATOR');
 
 --password 123
 INSERT INTO users (username, password, role, first_name, last_name) VALUES ('user1', '$2a$10$ybvrwq9fGFHllwIG5iK7reLz2K8jYcxS2IMV1nUMva3U7La0HqOG6', 1, 'Артем', 'Михалков');

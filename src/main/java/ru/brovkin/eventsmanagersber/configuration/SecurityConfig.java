@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers("/event/authorize/registration").permitAll()
                     .antMatchers("/event/user/**", "/event/participant/**")
-                    .hasAnyRole("COMMON_USER", "CREATOR", "ADMINISTRATOR")
+                    .hasAnyRole("COMMON_USER", "CREATOR")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()

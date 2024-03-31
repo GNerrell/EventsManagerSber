@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.brovkin.eventsmanagersber.DTO.CoordinatesDTO;
 import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.*;
 import ru.brovkin.eventsmanagersber.service.*;
@@ -25,13 +26,15 @@ public class EventsController {
     private final LocationService locationService;
     private final TagService tagService;
     private final ParticipantService participantService;
+    private final Api2GisService api2GisService;
 
-    public EventsController(EventService eventService, UserService userService, LocationService locationService, TagService tagService, ParticipantService participantService) {
+    public EventsController(EventService eventService, UserService userService, LocationService locationService, TagService tagService, ParticipantService participantService, Api2GisService api2GisService) {
         this.eventService = eventService;
         this.userService = userService;
         this.locationService = locationService;
         this.tagService = tagService;
         this.participantService = participantService;
+        this.api2GisService = api2GisService;
     }
 
     @GetMapping("/home")
@@ -107,6 +110,24 @@ public class EventsController {
         participant.setUser(user);
         participantService.addParticipant(participant);
         return "redirect:/event/home";
+    }
+
+    @GetMapping("/map/{eventId}")
+    public String showInteractiveMap(@PathVariable Long eventId,
+                                     @RequestParam("city") String city,
+                                     @RequestParam("street") String street,
+                                     @RequestParam("house") String house,
+                                     @RequestParam("way") String wayToMove,
+                                     Model model) {
+        Event event = eventService.getById(eventId);
+        model.addAttribute("event", event);
+        model.addAttribute("way", wayToMove);
+        Location location = event.getLocation();
+        CoordinatesDTO coordinatesEvent = api2GisService.getCoordinatesFromLocationAddress(location);
+        CoordinatesDTO coordinatesUser = api2GisService.getCoordinatesFromLocationAddress(city, street, house);
+        model.addAttribute("coordinatesEvent", coordinatesEvent);
+        model.addAttribute("coordinatesUser", coordinatesUser);
+        return "map_2gis";
     }
 
     private Event getEvent(String name, String description, Location location, Date date, String timeString, List<String> selectedTags) {
