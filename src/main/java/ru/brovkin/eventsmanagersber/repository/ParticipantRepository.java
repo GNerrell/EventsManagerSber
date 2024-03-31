@@ -15,5 +15,6 @@ public interface ParticipantRepository extends CrudRepository<Participant, Long>
     Optional<List<Participant>> findAllByActiveStatus(boolean activeStatus);
     Optional<List<Participant>> findAllByEvent(Event event);
     Optional<List<Participant>> findAllByUser(User user);
+    Optional<Participant> findFirstByUser(User user);
     void deleteParticipantById(Long id);
 }

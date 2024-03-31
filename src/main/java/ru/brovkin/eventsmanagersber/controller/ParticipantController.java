@@ -59,13 +59,23 @@ public class ParticipantController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getUserByName(authentication.getName());
         Event event = eventService.getById(eventId);
-        try {
-            Participant participant = participantService.getByUserAndEvent(user, event);
-            participantService.deleteById(participant.getId());
-            return "redirect:/event/previousPage";
-        } catch (LuckOfDataException e) {
+        if (isCreator(user)) {
+            eventService.deleteEventById(eventId);
             return "redirect:/event/previousPage";
         }
+        else {
+            try {
+                Participant participant = participantService.getByUserAndEvent(user, event);
+                participantService.deleteById(participant.getId());
+                return "redirect:/event/previousPage";
+            } catch (LuckOfDataException e) {
+                return "redirect:/event/previousPage";
+            }
+        }
+    }
+
+    private boolean isCreator(User user) {
+        return user.getRole().getName().equals("CREATOR") && participantService.getFirsByUser(user).getUser() == user;
     }
 
     private void setParticipantAttributes(User user, Participant participant, Event event) {

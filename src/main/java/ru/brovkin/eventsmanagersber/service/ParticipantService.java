@@ -1,6 +1,7 @@
 package ru.brovkin.eventsmanagersber.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Event;
@@ -52,7 +53,11 @@ public class ParticipantService {
     }
 
     public List<Participant> getAllByUser(User user) {
-        return participantRepository.findAllByUser(user).orElseThrow(() -> new LuckOfDataException("No such participants on event = " + user.getUsername() + "!"));
+        return participantRepository.findAllByUser(user).orElseThrow(() -> new LuckOfDataException("No such events with user = " + user.getUsername() + "!"));
+    }
+
+    public Participant getFirsByUser(User user) {
+        return participantRepository.findFirstByUser(user).orElseThrow(() -> new LuckOfDataException("There is no event creator!"));
     }
 
 }

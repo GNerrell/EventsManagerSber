@@ -59,6 +59,12 @@ INSERT INTO event_tags (event_id, tag_id) VALUES (6, 14);
 INSERT INTO event_tags (event_id, tag_id) VALUES (6, 6);
 INSERT INTO event_tags (event_id, tag_id) VALUES (6, 4);
 
+INSERT INTO participants (event_id, user_id, subscribed) VALUES (1, 5, true);
+INSERT INTO participants (event_id, user_id, subscribed) VALUES (2, 5, true);
+INSERT INTO participants (event_id, user_id, subscribed) VALUES (3, 5, true);
+INSERT INTO participants (event_id, user_id, subscribed) VALUES (4, 5, true);
+INSERT INTO participants (event_id, user_id, subscribed) VALUES (5, 5, true);
+INSERT INTO participants (event_id, user_id, subscribed) VALUES (6, 5, true);
 INSERT INTO participants (event_id, user_id, subscribed) VALUES (1, 1, true);
 INSERT INTO participants (event_id, user_id, subscribed) VALUES (1, 2, true);
 INSERT INTO participants (event_id, user_id, subscribed) VALUES (2, 2, true);

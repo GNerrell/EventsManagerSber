@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.*;
 import ru.brovkin.eventsmanagersber.service.*;
+import ru.brovkin.eventsmanagersber.utils.EventSorter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
@@ -36,6 +37,7 @@ public class EventsController {
     @GetMapping("/home")
     public String getMainPage(Model model) {
         List<Event> events = eventService.getAllEvents();
+        EventSorter.sortByDate(events);
         model.addAttribute("events", events);
         return "home";
     }

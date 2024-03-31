@@ -1,15 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-
+<body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e9ecef;">
     <div class="container-fluid">
         <a class="navbar-brand" href="/event/home">На главную</a>
@@ -35,22 +32,28 @@
     </div>
 </nav>
 
-
 <div class="container mt-5">
-    <h1 class="mb-4">Все мероприятия</h1>
-    <ul class="list-group">
-        <th:block th:each="event : ${events}">
+    <h1 class="mb-4">Ваш профиль</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Персональные данные:</h5>
+            <p class="card-text">Логин: <span th:text="${user.username}"></span></p>
+            <p class="card-text">Имя: <span th:text="${user.firstName}"></span></p>
+            <p class="card-text">Фамилия: <span th:text="${user.lastName}"></span></p>
+        </div>
+    </div>
+    <h2 class="mb-4">Мероприятия, в которых вы учавствуете:</h2>
+    <div class="list-group">
+        <th:block th:each="event : ${userEvents}">
             <a th:href="@{/event/details/{eventId}(eventId=${event.id})}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                 <span th:text="${event.name}"></span>
                 <span th:text="${#dates.format(event.date, 'dd.MM.yyyy')}" class="badge bg-secondary rounded-pill"></span>
             </a>
+            <form th:action="@{/event/participant/delete/{eventId}(eventId=${event.id})}" method="post">
+                <button type="submit" class="btn btn-danger btn-sm">Отписаться</button>
+            </form>
         </th:block>
-    </ul>
+    </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>
