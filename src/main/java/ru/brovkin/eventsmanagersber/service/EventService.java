@@ -7,6 +7,7 @@ import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Location;
 import ru.brovkin.eventsmanagersber.repository.EventRepository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,9 @@ public class EventService {
     }
 
     public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+        List<Event> events = new ArrayList<>();
+        eventRepository.findAll().forEach(events::add);
+        return events;
     }
 
     public List<Event> getEventsByLocation(Location location) {

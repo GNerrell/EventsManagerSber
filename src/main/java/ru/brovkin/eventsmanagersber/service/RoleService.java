@@ -6,6 +6,7 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Role;
 import ru.brovkin.eventsmanagersber.repository.RoleRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,9 @@ public class RoleService {
     }
 
     public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+        List<Role> roles = new ArrayList<>();
+        roleRepository.findAll().forEach(roles::add);
+        return roles;
     }
 
     public Role getById(Long id) {

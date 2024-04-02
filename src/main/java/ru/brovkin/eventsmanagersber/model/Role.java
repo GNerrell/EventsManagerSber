@@ -3,6 +3,9 @@ package ru.brovkin.eventsmanagersber.model;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Класс сущности роли пользователя
+ */
 @Entity
 @Table(name = "roles")
 public class Role {

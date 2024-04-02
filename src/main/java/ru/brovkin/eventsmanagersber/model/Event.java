@@ -7,6 +7,9 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Класс сущности мероприятия
+ */
 @Entity
 @Table(name = "events")
 public class Event {

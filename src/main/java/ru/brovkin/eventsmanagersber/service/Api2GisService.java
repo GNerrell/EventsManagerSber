@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
-import ru.brovkin.eventsmanagersber.DTO.CoordinatesDTO;
+import ru.brovkin.eventsmanagersber.dto.CoordinatesDTO;
 import ru.brovkin.eventsmanagersber.model.Location;
 
 import java.io.BufferedReader;

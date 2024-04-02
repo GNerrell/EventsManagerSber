@@ -6,6 +6,7 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Location;
 import ru.brovkin.eventsmanagersber.repository.LocationRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,9 @@ public class LocationService {
     }
 
     public List<Location> getAllLocations() {
-        return locationRepository.findAll();
+        List<Location> locations = new ArrayList<>();
+        locationRepository.findAll().forEach(locations::add);
+        return locations;
     }
 
     public void deleteLocationById(Long id) {

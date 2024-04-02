@@ -4,6 +4,9 @@ package ru.brovkin.eventsmanagersber.model;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Класс сущности места проведения
+ */
 @Entity
 @Table(name = "locations")
 public class Location {

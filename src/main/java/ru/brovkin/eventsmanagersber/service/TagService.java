@@ -6,6 +6,7 @@ import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.Tag;
 import ru.brovkin.eventsmanagersber.repository.TagRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +39,9 @@ public class TagService {
     }
 
     public List<Tag> getAllTags() {
-        return tagRepository.findAll();
+        List<Tag> tags = new ArrayList<>();
+        tagRepository.findAll().forEach(tags::add);
+        return tags;
     }
 
     public Tag getByName(String name) {

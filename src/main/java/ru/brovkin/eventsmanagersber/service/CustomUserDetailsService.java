@@ -21,6 +21,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Создает объект UserDetails для авторизации пользователя в системе
+     * @param username - логин пользователя
+     * @return объект класса UserDetails
+     * @throws LuckOfDataException - показывает на отсутствие данных о пользователе
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws LuckOfDataException {
         User user = userRepository.findUserByUsername(username)

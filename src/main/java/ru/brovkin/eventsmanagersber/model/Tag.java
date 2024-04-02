@@ -3,6 +3,9 @@ package ru.brovkin.eventsmanagersber.model;
 
 import javax.persistence.*;
 
+/**
+ * Класс сущности категории мероприятия
+ */
 @Entity
 @Table(name = "tags")
 public class Tag {

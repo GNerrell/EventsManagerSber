@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.brovkin.eventsmanagersber.DTO.CoordinatesDTO;
+import ru.brovkin.eventsmanagersber.dto.CoordinatesDTO;
 import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
 import ru.brovkin.eventsmanagersber.model.*;
 import ru.brovkin.eventsmanagersber.service.*;
@@ -17,6 +17,9 @@ import java.sql.Time;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Класс для управления соытиями, связанныими с мероприятими
+ */
 @Controller
 @RequestMapping("/event")
 public class EventsController {
@@ -68,7 +71,8 @@ public class EventsController {
      * Просмотр события по его идентификатору
      * @param eventId - идентификатор события, которое желаем просмотреть
      * @param model - с её помощью передаем объекты события на форму
-     * @return
+     * @return переносит на форму с отдельным событием,
+     * либо на предыдщую страницу, если событие не найдено в базе данных
      */
     @GetMapping("/details/{eventId}")
     public String showEventDetailsPage(@PathVariable Long eventId, Model model) {
@@ -87,7 +91,8 @@ public class EventsController {
     /**
      * Форма создания события
      * @param model - с ее помощью на форму переносятся все тэги, локации и времени
-     * @return
+     * @return переносит на форму создания мероприятия,
+     * либо на предыдущую страницу, если пользователь не имеет роли CREATOR
      */
     @GetMapping("/create")
     public String showCreateEventForm(Model model) {

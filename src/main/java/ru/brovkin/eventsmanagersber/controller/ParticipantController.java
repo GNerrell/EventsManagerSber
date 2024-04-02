@@ -14,6 +14,9 @@ import ru.brovkin.eventsmanagersber.service.UserService;
 
 import javax.transaction.Transactional;
 
+/**
+ * Класс для управления событиями, связанными с участниками мероприятий
+ */
 @Controller
 @RequestMapping("/event/participant")
 public class ParticipantController {

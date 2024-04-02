@@ -17,6 +17,9 @@ import ru.brovkin.eventsmanagersber.utils.EventSorter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Класс для управления событиями, связанными с пользователем
+ */
 @Controller
 @RequestMapping("/event/user")
 public class UserController {

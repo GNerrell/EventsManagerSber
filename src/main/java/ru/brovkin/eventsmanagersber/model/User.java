@@ -3,6 +3,9 @@ package ru.brovkin.eventsmanagersber.model;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Класс сущности пользователя
+ */
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames="username"))
 public class User {

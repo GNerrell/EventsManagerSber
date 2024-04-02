@@ -15,6 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import ru.brovkin.eventsmanagersber.service.CustomUserDetailsService;
 
+/**
+ * Класс для настройки доступа к веб страницам приложения
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -34,32 +37,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder);
     }
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers("/event/authorize/registration").permitAll()
-                    .antMatchers("/event/user/**", "/event/participant/**")
-                    .hasAnyRole("COMMON_USER", "CREATOR")
-                    .anyRequest().authenticated()
-                    .and()
-                    .formLogin()
-                    .loginPage("/event/authorize/login")
-                    .defaultSuccessUrl("/event/home", true)
-                    .failureUrl("/event/authorize/login")
-                    .permitAll()
-                    .and()
-                    .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login?logout")
-                    .permitAll()
-                    .and()
-                    .sessionManagement()
-                    .invalidSessionUrl("/login")
-                    .maximumSessions(1)
-                    .sessionRegistry(sessionRegistry());
-        }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/event/authorize/registration").permitAll()
+                .antMatchers("/event/user/**", "/event/participant/**")
+                .hasAnyRole("COMMON_USER", "CREATOR")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/event/authorize/login")
+                .defaultSuccessUrl("/event/home", true)
+                .failureUrl("/event/authorize/login")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
+                .sessionManagement()
+                .invalidSessionUrl("/login")
+                .maximumSessions(1)
+                .sessionRegistry(sessionRegistry());
+    }
 
     @Bean
     public SessionRegistry sessionRegistry() {

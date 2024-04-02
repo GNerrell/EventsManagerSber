@@ -12,6 +12,9 @@ import ru.brovkin.eventsmanagersber.service.UserService;
 
 import java.util.List;
 
+/**
+ * Класс для упавления событиями, связанными с авторизацией и регистрацией пользователя
+ */
 @Controller
 @RequestMapping("/event/authorize")
 public class AuthorizationController {
@@ -25,11 +28,20 @@ public class AuthorizationController {
         this.roleService = roleService;
     }
 
+    /**
+     *
+     * @return перенос на страницу авторизации
+     */
     @GetMapping("/login")
     public String loginPageHtml() {
         return "login";
     }
 
+    /**
+     *
+     * @param model - передача на форму нового пользователя и всех доступных ролей
+     * @return перенос на страницу регистрации
+     */
     @GetMapping("/registration")
     public String registrationPageHtml(Model model) {
         List<Role> roles = roleService.getAllRoles();
@@ -38,6 +50,12 @@ public class AuthorizationController {
         return "registration";
     }
 
+    /**
+     * Добавление пользователя в базу данных
+     * @param user - пользователь добавляемый в базу даннных
+     * @param model - передача сообщения о существующем пользователе
+     * @return возрат на страницу авторизации при успешной регистрации и остаться на странице регистрации в другом случае
+     */
     @PostMapping("/registration")
     public String addUserToSystem(@ModelAttribute("user") User user, Model model) {
         try {

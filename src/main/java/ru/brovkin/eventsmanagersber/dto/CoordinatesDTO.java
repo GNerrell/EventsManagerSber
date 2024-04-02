@@ -1,4 +1,4 @@
-package ru.brovkin.eventsmanagersber.DTO;
+package ru.brovkin.eventsmanagersber.dto;
 
 /**
  * Класс предназначенный для хранения значений после получения

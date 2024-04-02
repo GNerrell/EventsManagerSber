@@ -8,6 +8,10 @@ import ru.brovkin.eventsmanagersber.model.User;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Интерфейс для реализации базовых методов CRUD для участника мероприятия,
+ * а также дополнительных функций по поиску
+ */
 public interface ParticipantRepository extends CrudRepository<Participant, Long> {
 
     Optional<Participant> findParticipantById(Long id);
