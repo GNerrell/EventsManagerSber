@@ -41,7 +41,7 @@ public class RoleServiceTests {
     public void testGetAllRolesFromDb() {
         List<Role> role = roleService.getAllRoles();
         assertThat(role.get(1).getName()).isEqualTo("CREATOR");
-        assertThat(role.size()).isEqualTo(3);
+        assertThat(role.size()).isEqualTo(2);
     }
 
     @Test

@@ -32,12 +32,12 @@ public class ParticipantServiceTests {
     @Test
     public void testGetParticipantFromDbById() {
         Participant participant = participantService.getById(1L);
-        assertThat(participant.getUser().getUsername()).isEqualTo("user1");
+        assertThat(participant.getUser().getUsername()).isEqualTo("creator1");
     }
 
     @Test
     public void testGetParticipantFromDbByUserAndEvent() {
-        User testUser = userService.getUserById(1L);
+        User testUser = userService.getUserById(5L);
         Event testEvent = eventService.getById(1L);
         Participant participant = participantService.getByUserAndEvent(testUser, testEvent);
         assertThat(participant.getId()).isEqualTo(1L);
@@ -47,14 +47,14 @@ public class ParticipantServiceTests {
     public void testGetParticipantsFromDbByActiveStatus() {
         boolean testStatus = true;
         List<Participant> participants = participantService.getAllByActiveStatus(testStatus);
-        assertThat(participants.size()).isEqualTo(13);
+        assertThat(participants.size()).isEqualTo(19);
     }
 
     @Test
     public void testGetParticipantsFromDbByEvent() {
         Event event = eventService.getById(1L);
         List<Participant> participants = participantService.getAllByEvent(event);
-        assertThat(participants.size()).isEqualTo(2);
+        assertThat(participants.size()).isEqualTo(3);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class ParticipantServiceTests {
         participant.setUser(userService.getUserById(3L));
         participant.setActiveStatus(true);
         participantService.addParticipant(participant);
-        Participant participantDb = participantService.getById(14L);
+        Participant participantDb = participantService.getById(20L);
         assertThat(participantDb.getEvent()).isEqualTo(eventService.getById(1L));
         assertThat(participantDb.getUser()).isEqualTo(userService.getUserById(3L));
         participantService.deleteById(participantDb.getId());
