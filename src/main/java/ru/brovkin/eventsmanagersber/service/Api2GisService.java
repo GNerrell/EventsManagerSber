@@ -118,9 +118,12 @@ public class Api2GisService {
     private static URL getUrlFromLocation(Location location) throws MalformedURLException {
         StringBuilder urlString = new StringBuilder();
         urlString.append("https://catalog.api.2gis.com/3.0/items/geocode?q=");
-        urlString.append(location.getCity()).append(",%20");
-        urlString.append(location.getStreet()).append(",%20");
-        urlString.append(location.getHouse()).append(",%20");
+        String cityWithoutSpaces = location.getCity().replace(" ", "");
+        urlString.append(cityWithoutSpaces).append(",%20");
+        String streetWithoutSpaces = location.getStreet().replace(" ", "");
+        urlString.append(streetWithoutSpaces).append(",%20");
+        String houseWithoutSpaces = location.getHouse().replace(" ", "");
+        urlString.append(houseWithoutSpaces).append(",%20");
         urlString.append("&fields=items.point&key=");
         urlString.append(API_KEY_2GIS);
         return new URL(urlString.toString());
@@ -137,9 +140,12 @@ public class Api2GisService {
     private static URL getUrlFromLocationData(String city, String street, String house) throws MalformedURLException {
         StringBuilder urlString = new StringBuilder();
         urlString.append("https://catalog.api.2gis.com/3.0/items/geocode?q=");
-        urlString.append(city).append(",%20");
-        urlString.append(street).append(",%20");
-        urlString.append(house).append(",%20");
+        String cityWithoutSpaces = city.replace(" ", "");
+        urlString.append(cityWithoutSpaces).append(",%20");
+        String streetWithoutSpaces = street.replace(" ", "");
+        urlString.append(streetWithoutSpaces).append(",%20");
+        String houseWithoutSpaces = house.replace(" ", "");
+        urlString.append(houseWithoutSpaces).append(",%20");
         urlString.append("&fields=items.point&key=");
         urlString.append(API_KEY_2GIS);
         return new URL(urlString.toString());

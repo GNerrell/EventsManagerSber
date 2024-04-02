@@ -162,6 +162,8 @@ public class EventsController {
         model.addAttribute("way", wayToMove);
         Location location = event.getLocation();
         CoordinatesDTO coordinatesEvent = api2GisService.getCoordinatesFromLocationAddress(location);
+        System.out.println(coordinatesEvent.getLat());
+        System.out.println(coordinatesEvent.getLon());
         CoordinatesDTO coordinatesUser = api2GisService.getCoordinatesFromLocationAddress(city, street, house);
         model.addAttribute("coordinatesEvent", coordinatesEvent);
         model.addAttribute("coordinatesUser", coordinatesUser);
