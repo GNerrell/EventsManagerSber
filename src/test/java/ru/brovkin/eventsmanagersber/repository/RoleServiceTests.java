@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Role;
 import ru.brovkin.eventsmanagersber.service.RoleService;
 
@@ -53,7 +53,7 @@ public class RoleServiceTests {
         Role roleDb = roleService.getByName(name);
         assertThat(roleDb.getId()).isEqualTo(role.getId());
         roleService.deleteById(roleDb.getId());
-        assertThrows(LuckOfDataException.class, () -> roleService.getById(roleDb.getId()));
+        assertThrows(DataLackException.class, () -> roleService.getById(roleDb.getId()));
     }
 
     @Test

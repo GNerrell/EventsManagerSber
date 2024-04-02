@@ -6,10 +6,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Location;
-import ru.brovkin.eventsmanagersber.model.Role;
-import ru.brovkin.eventsmanagersber.model.User;
 import ru.brovkin.eventsmanagersber.service.LocationService;
 
 import java.util.List;
@@ -72,7 +70,7 @@ public class LocationServiceTests {
         Location locationDb = locationService.getById(9L);
         assertThat(locationDb.getCity()).isEqualTo(location.getCity());
         locationService.deleteLocationById(locationDb.getId());
-        assertThrows(LuckOfDataException.class, () -> locationService.getById(locationDb.getId()));
+        assertThrows(DataLackException.class, () -> locationService.getById(locationDb.getId()));
     }
 
     @Test

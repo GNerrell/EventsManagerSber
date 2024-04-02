@@ -20,11 +20,11 @@ import java.net.URL;
  * для получения координат широты и долготы по адресу
  */
 @Service
-public class Api2GisService {
+public class GeocoderApi2GisService {
 
     public static final String API_KEY_2GIS = "9ef2dfa1-7d97-419a-b808-b0e872a7d933";
 
-    public Api2GisService() {
+    public GeocoderApi2GisService() {
 
     }
 
@@ -36,12 +36,10 @@ public class Api2GisService {
     public CoordinatesDTO getCoordinatesFromLocationAddress(Location location) {
         try {
             URL url = getUrlFromLocation(location);
-            CoordinatesDTO coordinates = getCoordinatesDTO(url);
-            if (coordinates != null) return coordinates;
+            return getCoordinatesDTO(url);
         } catch (Exception e) {
             return null;
         }
-        return null;
     }
 
     /**
@@ -54,12 +52,10 @@ public class Api2GisService {
     public CoordinatesDTO getCoordinatesFromLocationAddress(String city, String street, String house) {
         try {
             URL url = getUrlFromLocationData(city, street, house);
-            CoordinatesDTO coordinates = getCoordinatesDTO(url);
-            if (coordinates != null) return coordinates;
+            return getCoordinatesDTO(url);
         } catch (Exception e) {
             return null;
         }
-        return null;
     }
 
     @Nullable
@@ -70,10 +66,7 @@ public class Api2GisService {
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
             StringBuilder response = getResponse(connection);
 
-            CoordinatesDTO lat = getCoordinatesDTO(response);
-            if (lat != null) {
-                return lat;
-            }
+            return getCoordinatesDTO(response);
         }
         connection.disconnect();
         return null;
@@ -100,13 +93,10 @@ public class Api2GisService {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.toString());
         JsonNode itemsNode = root.path("result").path("items");
-        if (itemsNode.isArray() && !itemsNode.isEmpty()) {
-            JsonNode pointNode = itemsNode.get(0).path("point");
-            double lat = pointNode.path("lat").asDouble();
-            double lon = pointNode.path("lon").asDouble();
-            return new CoordinatesDTO(lat, lon);
-        }
-        return null;
+        JsonNode pointNode = itemsNode.get(0).path("point");
+        double lat = pointNode.path("lat").asDouble();
+        double lon = pointNode.path("lon").asDouble();
+        return new CoordinatesDTO(lat, lon);
     }
 
     /**

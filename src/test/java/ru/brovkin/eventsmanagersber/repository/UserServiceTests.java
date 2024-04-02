@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import ru.brovkin.eventsmanagersber.configuration.PasswordConfig;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Role;
 import ru.brovkin.eventsmanagersber.model.User;
 import ru.brovkin.eventsmanagersber.service.RoleService;
@@ -72,12 +72,12 @@ public class UserServiceTests {
         User userDb = userService.getUserByName("SuperAndrey");
         assertThat(userDb.getUsername()).isEqualTo(user.getUsername());
         userService.deleteById(userDb.getId());
-        assertThrows(LuckOfDataException.class, () -> userService.getUserById(userDb.getId()));
+        assertThrows(DataLackException.class, () -> userService.getUserById(userDb.getId()));
     }
 
     @Test
     public void testDeleteLinkedUserById() {
         userService.deleteById(1L);
-        assertThrows(LuckOfDataException.class, () -> userService.getUserById(1L));
+        assertThrows(DataLackException.class, () -> userService.getUserById(1L));
     }
 }

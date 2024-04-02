@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Tag;
 import ru.brovkin.eventsmanagersber.service.TagService;
 
@@ -58,7 +58,7 @@ public class TagServiceTests {
         Tag tagDb = tagService.getByName("для работников");
         assertThat(tagDb.getName()).isEqualTo(tag.getName());
         tagService.deleteById(tagDb.getId());
-        assertThrows(LuckOfDataException.class, () -> tagService.getTagById(tagDb.getId()));
+        assertThrows(DataLackException.class, () -> tagService.getTagById(tagDb.getId()));
     }
 
     @Test

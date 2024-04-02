@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.User;
 import ru.brovkin.eventsmanagersber.repository.UserRepository;
 
@@ -25,12 +25,12 @@ public class CustomUserDetailsService implements UserDetailsService {
      * Создает объект UserDetails для авторизации пользователя в системе
      * @param username - логин пользователя
      * @return объект класса UserDetails
-     * @throws LuckOfDataException - показывает на отсутствие данных о пользователе
+     * @throws DataLackException - показывает на отсутствие данных о пользователе
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws LuckOfDataException {
+    public UserDetails loadUserByUsername(String username) throws DataLackException {
         User user = userRepository.findUserByUsername(username)
-                .orElseThrow(() -> new LuckOfDataException("User not found with username: " + username));
+                .orElseThrow(() -> new DataLackException("User not found with username: " + username));
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())

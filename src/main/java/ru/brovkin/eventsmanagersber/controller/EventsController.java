@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.brovkin.eventsmanagersber.dto.CoordinatesDTO;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.*;
 import ru.brovkin.eventsmanagersber.service.*;
 import ru.brovkin.eventsmanagersber.utils.EventSorter;
@@ -29,15 +29,15 @@ public class EventsController {
     private final LocationService locationService;
     private final TagService tagService;
     private final ParticipantService participantService;
-    private final Api2GisService api2GisService;
+    private final GeocoderApi2GisService geocoderApi2GisService;
 
-    public EventsController(EventService eventService, UserService userService, LocationService locationService, TagService tagService, ParticipantService participantService, Api2GisService api2GisService) {
+    public EventsController(EventService eventService, UserService userService, LocationService locationService, TagService tagService, ParticipantService participantService, GeocoderApi2GisService geocoderApi2GisService) {
         this.eventService = eventService;
         this.userService = userService;
         this.locationService = locationService;
         this.tagService = tagService;
         this.participantService = participantService;
-        this.api2GisService = api2GisService;
+        this.geocoderApi2GisService = geocoderApi2GisService;
     }
 
     /**
@@ -83,7 +83,7 @@ public class EventsController {
             model.addAttribute("event", event);
             setModelSubscribedAttribute(model, user, event);
             return "event";
-        } catch (LuckOfDataException e) {
+        } catch (DataLackException e) {
             return "redirect:/previousPage";
         }
     }
@@ -161,10 +161,10 @@ public class EventsController {
         model.addAttribute("event", event);
         model.addAttribute("way", wayToMove);
         Location location = event.getLocation();
-        CoordinatesDTO coordinatesEvent = api2GisService.getCoordinatesFromLocationAddress(location);
+        CoordinatesDTO coordinatesEvent = geocoderApi2GisService.getCoordinatesFromLocationAddress(location);
         System.out.println(coordinatesEvent.getLat());
         System.out.println(coordinatesEvent.getLon());
-        CoordinatesDTO coordinatesUser = api2GisService.getCoordinatesFromLocationAddress(city, street, house);
+        CoordinatesDTO coordinatesUser = geocoderApi2GisService.getCoordinatesFromLocationAddress(city, street, house);
         model.addAttribute("coordinatesEvent", coordinatesEvent);
         model.addAttribute("coordinatesUser", coordinatesUser);
         return "map_2gis";
@@ -174,7 +174,7 @@ public class EventsController {
         try {
             participantService.getByUserAndEvent(user, event);
             model.addAttribute("subscribed", true);
-        } catch (LuckOfDataException e) {
+        } catch (DataLackException e) {
             model.addAttribute("subscribed", false);
         }
     }

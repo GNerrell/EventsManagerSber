@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import ru.brovkin.eventsmanagersber.configuration.PasswordConfig;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Participant;
 import ru.brovkin.eventsmanagersber.model.User;
@@ -85,12 +85,12 @@ public class ParticipantServiceTests {
         assertThat(participantDb.getEvent()).isEqualTo(eventService.getById(1L));
         assertThat(participantDb.getUser()).isEqualTo(userService.getUserById(3L));
         participantService.deleteById(participantDb.getId());
-        assertThrows(LuckOfDataException.class, () -> participantService.getById(participantDb.getId()));
+        assertThrows(DataLackException.class, () -> participantService.getById(participantDb.getId()));
     }
 
     @Test
     public void testDeleteLinkedParticipantById() {
         participantService.deleteById(1L);
-        assertThrows(LuckOfDataException.class, () -> participantService.getById(1L));
+        assertThrows(DataLackException.class, () -> participantService.getById(1L));
     }
 }

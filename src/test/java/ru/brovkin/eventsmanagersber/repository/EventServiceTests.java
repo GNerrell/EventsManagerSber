@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Location;
 import ru.brovkin.eventsmanagersber.model.Tag;
@@ -98,12 +98,12 @@ public class EventServiceTests {
         assertThat(eventDb.getDescription()).isEqualTo(event.getDescription());
         assertThat(eventDb.getDate()).isEqualTo(event.getDate());
         eventService.deleteEventById(eventDb.getId());
-        assertThrows(LuckOfDataException.class, () -> eventService.getById(eventDb.getId()));
+        assertThrows(DataLackException.class, () -> eventService.getById(eventDb.getId()));
     }
 
     @Test
     public void testDeleteLinkedEventById() {
         eventService.deleteEventById(1L);
-        assertThrows(LuckOfDataException.class, () -> eventService.getById(1L));
+        assertThrows(DataLackException.class, () -> eventService.getById(1L));
     }
 }

@@ -4,7 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Participant;
 import ru.brovkin.eventsmanagersber.model.User;
@@ -45,7 +45,7 @@ public class ParticipantController {
             try {
                 participantService.getByUserAndEvent(user, event);
                 return "redirect:/event/previousPage";
-            } catch (LuckOfDataException e) {
+            } catch (DataLackException e) {
                 Participant participant = new Participant();
                 setParticipantAttributes(user, participant, event);
                 participantService.addParticipant(participant);
@@ -76,7 +76,7 @@ public class ParticipantController {
                 Participant participant = participantService.getByUserAndEvent(user, event);
                 participantService.deleteById(participant.getId());
                 return "redirect:/event/previousPage";
-            } catch (LuckOfDataException e) {
+            } catch (DataLackException e) {
                 return "redirect:/event/previousPage";
             }
         }

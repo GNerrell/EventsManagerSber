@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.brovkin.eventsmanagersber.exception.LuckOfDataException;
+import ru.brovkin.eventsmanagersber.exception.DataLackException;
 import ru.brovkin.eventsmanagersber.model.Event;
 import ru.brovkin.eventsmanagersber.model.Participant;
 import ru.brovkin.eventsmanagersber.model.User;
@@ -64,7 +64,7 @@ public class UserController {
             return participants.stream()
                     .map(Participant::getEvent)
                     .collect(Collectors.toList());
-        } catch (LuckOfDataException e) {
+        } catch (DataLackException e) {
             return null;
         }
     }
